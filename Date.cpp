@@ -1,4 +1,6 @@
 #include <iostream>
+#include <sstream>
+#include <string>
 using namespace std;
 
 class Date
@@ -7,6 +9,8 @@ private:
 	int Day;
 	int Month;
 	int Year;
+
+	string DateInString;
 public:
 	Date(int InputDay, int InputMonth, int InputYear) :
 		Day(InputDay), Month(InputMonth), Year(InputDay) {};
@@ -33,6 +37,15 @@ public:
 		--Day;
 		return Copy;
 	}
+	operator const char* ()
+	{
+		ostringstream formattedDate;
+		formattedDate << Day << " / " << Month << " / " << Year;
+
+		DateInString = formattedDate.str();
+		return DateInString.c_str();
+	}
+
 	void DisplayDate()
 	{
 		cout << Day << " / " << Month << " / " << Year << endl;
