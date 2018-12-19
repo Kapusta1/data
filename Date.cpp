@@ -16,7 +16,7 @@ private:
 	string DateInString;
 public:
 	Date(int InputDay, int InputMonth, int InputYear) :
-		Day(InputDay), Month(InputMonth), Year(InputDay) {};
+		Day(InputDay), Month(InputMonth), Year(InputYear) {};
 	Date & operator++()
 	{
 		++Day;
@@ -49,6 +49,17 @@ public:
 		return DateInString.c_str();
 	}
 
+	Date operator +(int daysToAdd)
+	{
+		Date newDate(Day + daysToAdd, Month, Year);
+		return newDate;
+	}
+
+	Date operator -(int daysToSub)
+	{
+		return Date(Day - daysToSub, Month, Year);
+	}
+
 	void DisplayDate()
 	{
 		cout << Day << " / " << Month << " / " << Year << endl;
@@ -57,14 +68,18 @@ public:
 
 int main()
 {
-	smart_point<int> pDynamic(new int);
-	*pDynamic = 42;
+	Date Holiday(25, 11, 2011);
 
-	cout << "Integer value is: " << *pDynamic << endl;
+	cout << "Holliday on: ";
+	Holiday.DisplayDate();
 
-	smart_point<Date> pHoliday(new Date(25, 11, 2011));
-	cout << "The new instace of date contrains: ";
+	Date PreviousHoliday(Holiday - 19);
+	cout << "Previous holiday on: ";
+	PreviousHoliday.DisplayDate();
 
-	pHoliday->DisplayDate();
+	Date NextHoliday(Holiday + 6);
+	cout << "Next holiday on: ";
+	NextHoliday.DisplayDate();
+
 	return 0;
 }
