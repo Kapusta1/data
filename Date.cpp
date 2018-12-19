@@ -1,6 +1,9 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include "smart_pointer.h"
+#include <memory>
+
 using namespace std;
 
 class Date
@@ -54,20 +57,14 @@ public:
 
 int main()
 {
-	Date Holiday(25, 12, 2011);
+	smart_point<int> pDynamic(new int);
+	*pDynamic = 42;
 
-	cout << "The date object is initialised to: ";
-	Holiday.DisplayDate();
+	cout << "Integer value is: " << *pDynamic << endl;
 
-	++Holiday;
+	smart_point<Date> pHoliday(new Date(25, 11, 2011));
+	cout << "The new instace of date contrains: ";
 
-	cout << "Date after prefix-increment is: ";
-
-	Holiday.DisplayDate();
-	--Holiday;
-	--Holiday;
-
-	cout << "Date after two prefix-decrements is: ";
-	Holiday.DisplayDate();
+	pHoliday->DisplayDate();
 	return 0;
 }
